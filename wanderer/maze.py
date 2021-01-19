@@ -3,10 +3,10 @@ from tkinter import *
 
 class Maze():
 
-    def __init__(self, canvas, controller):
+    def __init__(self, canvas, controller, level):
         self.controller = controller
         self.canvas = canvas
-        self.level = 1
+        self.level = level
         self.wall = PhotoImage(file="images/wall.gif")
         self.floor = PhotoImage(file="images/floor.gif")
         self.hero = PhotoImage(file="images/hero-down.gif")
@@ -46,7 +46,7 @@ class Maze():
                     temp.append(0)
             self.layout.append(temp)
 
-        if self.level == 1:
+        if self.level == 1 or self.level == 2 or self.level == 3:
             self.default_map()
 
             for p in self.layout:

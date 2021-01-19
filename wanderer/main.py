@@ -51,11 +51,18 @@ def on_key_press(e):
             print("strike!")
             enemy = enemy = ctr.enemies.get_enemy_at(ctr.hero.position_row,ctr.hero.position_col)
             ctr.hero.strike(enemy)
+            boss = ctr.enemies.get_boss()
 
             if enemy.current_hp <= 0:
                 ctr.enemies.enemies.remove(enemy)
                 ctr.hero.is_fighting = False
                 ctr.hero.level_up()
+
+                if enemy.has_key:
+                    ctr.hero.has_key = True
+
+                if ctr.hero.has_key and boss.current_hp <= 0:
+                    ctr.next_level()
             else:
                 enemy.strike(ctr.hero)
                 if ctr.hero.current_hp <= 0:

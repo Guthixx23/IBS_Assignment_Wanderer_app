@@ -11,6 +11,7 @@ class Boss(Character):
         self.image = PhotoImage(file="images/boss.gif")
         self.name = "Boss"
         self.level = self.calculate_level()
+        self.has_key = False
 
         self.hp = 2 * self.level * self.roll_d6() + self.roll_d6()
         self.current_hp = self.hp

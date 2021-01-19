@@ -1,5 +1,6 @@
 from tkinter import *
 from wanderer.character import Character
+import random
 
 
 class Hero(Character):
@@ -13,6 +14,7 @@ class Hero(Character):
         self.name = "Hero"
         self.is_fighting = False
         self.level = 1
+        self.has_key = False
 
         self.controller = controller
         self.canvas = canvas
@@ -60,7 +62,7 @@ class Hero(Character):
                 self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 1) * 72 + 36,
                                          image=self.image_left)
 
-        #right
+        # right
         if col == self.position_col + 1:
             if self.controller.maze.layout[self.position_row][self.position_col + 1] != 1:
                 self.canvas.create_image((self.position_col) * 72 + 36, (self.position_row - 1) * 72 + 36,
@@ -69,7 +71,6 @@ class Hero(Character):
             else:
                 self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 1) * 72 + 36,
                                          image=self.image_right)
-
 
     """
 
@@ -121,7 +122,23 @@ class Hero(Character):
         return [self.position_col, self.position_row]
 
     def level_up(self):
+        self.level += 1
         self.hp += self.roll_d6()
         self.dp += self.roll_d6()
         self.sp += self.roll_d6()
 
+    def heal(self):
+        i = random.randint(0, 9)
+
+        if i in [0, 1, 2, 3, 4]:
+            if self.current_hp < 0.9 * self.hp:
+                self.current_hp += 0.1 * self.hp
+            else:
+                self.current_hp = self.hp
+        elif i in [5, 6, 7, 8]:
+            if self.current_hp < (2 * self.hp / 3):
+                self.current_hp += self.hp / 3
+            else:
+                self.current_hp = self.hp
+        else:
+            self.current_hp = self.hp

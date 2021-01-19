@@ -48,8 +48,14 @@ class Character():
                 i.hp) + " | DP: " + str(i.dp) + " | SP: " + str(i.sp))
 
         """
-        return self.name + " (Level " + str(self.level) + ") HP: " + str(self.current_hp) + "/" + str(
-            self.hp) + " | DP: " + str(self.dp) + " | SP: " + str(self.dp)
+
+        stats = self.name + " (Level " + str(self.level) + ") HP: " + str(self.current_hp) + "/" + str(
+                self.hp) + " | DP: " + str(self.dp) + " | SP: " + str(self.dp)
+
+        if self.name != "Skeleton":
+            return stats
+        else:
+            return stats + " | Key: " + str(self.has_key)
 
     def calculate_level(self):
         i = random.randint(0,9)

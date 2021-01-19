@@ -31,6 +31,9 @@ class Enemies():
 
         return False
 
+    def get_boss(self):
+        return self.enemies[0]
+
 
 
 
