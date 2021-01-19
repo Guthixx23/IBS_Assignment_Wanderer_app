@@ -10,6 +10,9 @@ class Hero(Character):
         self.dp = 2 * self.roll_d6()
         self.sp = 5 + self.roll_d6()
         self.current_hp = self.hp
+        self.name = "Hero"
+        self.is_fighting = False
+        self.level = 1
 
         self.controller = controller
         self.canvas = canvas
@@ -117,4 +120,8 @@ class Hero(Character):
     def get_hero_position(self):
         return [self.position_col, self.position_row]
 
+    def level_up(self):
+        self.hp += self.roll_d6()
+        self.dp += self.roll_d6()
+        self.sp += self.roll_d6()
 

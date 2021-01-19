@@ -21,31 +21,60 @@ var1 = StringVar()
 # hero = Hero(canvas)
 
 def on_key_press(e):
-    current_pos = ctr.hero.get_hero_position()
 
-    if e.keycode == 87:
-        # up
+    if not ctr.hero.is_fighting:
+        current_pos = ctr.hero.get_hero_position()
 
-        ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
-        ctr.hero.draw_hero_2(ctr.hero.position_row-1, ctr.hero.position_col)
-        print("up [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+        if e.keycode == 87:
+            # up
+            ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+            ctr.hero.draw_hero_2(ctr.hero.position_row-1, ctr.hero.position_col)
+            print("up [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
 
-    elif e.keycode == 83:
-        # down
-        ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
-        ctr.hero.draw_hero_2(ctr.hero.position_row+1, ctr.hero.position_col )
-        print("down [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
-    elif e.keycode == 68:
-        # right
-        ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
-        ctr.hero.draw_hero_2(ctr.hero.position_row, ctr.hero.position_col+1 )
-        print("right [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
-    elif e.keycode == 65:
-        # left
-        ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
-        ctr.hero.draw_hero_2(ctr.hero.position_row, ctr.hero.position_col-1)
-        print("left [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+        elif e.keycode == 83:
+            # down
+            ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+            ctr.hero.draw_hero_2(ctr.hero.position_row+1, ctr.hero.position_col )
+            print("down [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+        elif e.keycode == 68:
+            # right
+            ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+            ctr.hero.draw_hero_2(ctr.hero.position_row, ctr.hero.position_col+1 )
+            print("right [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+        elif e.keycode == 65:
+            # left
+            ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+            ctr.hero.draw_hero_2(ctr.hero.position_row, ctr.hero.position_col-1)
+            print("left [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
+    else:
+        if e.keycode == 32:
+            print("strike!")
+            enemy = enemy = ctr.enemies.get_enemy_at(ctr.hero.position_row,ctr.hero.position_col)
+            ctr.hero.strike(enemy)
 
+            if enemy.current_hp <= 0:
+                ctr.enemies.enemies.remove(enemy)
+                ctr.hero.is_fighting = False
+                ctr.hero.level_up()
+            else:
+                enemy.strike(ctr.hero)
+                if ctr.hero.current_hp <= 0:
+                    quit()
+
+
+    if ctr.enemies.get_enemy_at(ctr.hero.position_row,ctr.hero.position_col) != False:
+        enemy = ctr.enemies.get_enemy_at(ctr.hero.position_row,ctr.hero.position_col)
+        enemy_stat = enemy.display_stats()
+        hero_stat = ctr.hero.display_stats()
+        var1.set(hero_stat + "\t" + enemy_stat)
+        ctr.hero.is_fighting = True
+    else:
+        hero_stat = ctr.hero.display_stats()
+        var1.set(hero_stat)
+
+
+
+    """
     for i in ctr.enemies.enemies:
         if i.position_row == ctr.hero.position_row and i.position_col == ctr.hero.position_col:
             var1.set("Hero (Level " + str(ctr.maze.level) + ") HP: " + str(ctr.hero.current_hp) + "/" + str(
@@ -56,7 +85,7 @@ def on_key_press(e):
             var1.set( " " + str(random.randint(1,10)) + "Hero (Level " + str(ctr.maze.level) + ") HP: " + str(ctr.hero.current_hp) + "/" + str(
                 ctr.hero.hp) + " | DP: " + str(ctr.hero.dp) + " | SP: " + str(ctr.hero.sp))
 
-
+    """
 """
 
 # Creating a box that can draw itself in a certain position

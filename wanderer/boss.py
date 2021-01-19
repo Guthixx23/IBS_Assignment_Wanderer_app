@@ -9,7 +9,10 @@ class Boss(Character):
         self.canvas = canvas
         self.controller = controller
         self.image = PhotoImage(file="images/boss.gif")
+        self.name = "Boss"
+        self.level = self.calculate_level()
 
-        self.hp = 2 * self.controller.maze.level * self.roll_d6() + self.roll_d6()
-        self.dp = self.controller.maze.level / 2 * self.roll_d6() + self.roll_d6() / 2
-        self.sp = self.controller.maze.level * self.roll_d6() + self.controller.maze.level
+        self.hp = 2 * self.level * self.roll_d6() + self.roll_d6()
+        self.current_hp = self.hp
+        self.dp = self.level / 2 * self.roll_d6() + self.roll_d6() / 2
+        self.sp = self.level * self.roll_d6() + self.level

@@ -14,13 +14,23 @@ class Enemies():
 
         #random.randint(2, 5)
         for i in range(random.randint(2, 5)):
-            self.enemies.append(Skeleton(self.canvas, self.controller))
+            if i == 0:
+                self.enemies.append(Skeleton(self.canvas, self.controller, True))
+            else:
+                self.enemies.append(Skeleton(self.canvas, self.controller, False))
 
         for i in self.enemies:
             i.draw(self.canvas, self.controller.maze)
 
-        """
-        print("-----------------")
-        for i in controller.maze.layout:
-            print(i)
-        """
+
+    def get_enemy_at(self, row, col):
+
+        for i in self.enemies:
+            if i.position_row == row and i.position_col == col:
+                return i
+
+        return False
+
+
+
+
