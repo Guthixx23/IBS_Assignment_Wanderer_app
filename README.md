@@ -33,7 +33,7 @@ transferred to the next level.
 Monsters are moving randomly but only on every second move of the hero. If 
 they happen to outrun you in a corner wait a turn and catch them!
 
-*If the hero would step on a cell where the monster is moving away from 
+*If the hero would step on a cell which the monster is moving away from 
 the fight is not started. The same phenomenon can happen when the hero and 
 the monster are moving towards each other, resulting in a switch of cells*
 
