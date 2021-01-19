@@ -2,6 +2,7 @@ from wanderer.character import Character
 from tkinter import *
 
 
+# class for the Boss object
 class Boss(Character):
 
     def __init__(self, canvas, controller):

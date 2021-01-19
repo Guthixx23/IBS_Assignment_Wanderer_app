@@ -2,6 +2,7 @@ from wanderer.character import Character
 from tkinter import *
 
 
+# class for all the Skeleton objects
 class Skeleton(Character):
 
     def __init__(self, canvas, controller, key):

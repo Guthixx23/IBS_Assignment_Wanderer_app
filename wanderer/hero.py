@@ -3,6 +3,7 @@ from wanderer.character import Character
 import random
 
 
+# hero class
 class Hero(Character):
 
     def __init__(self, canvas, controller):
@@ -28,6 +29,7 @@ class Hero(Character):
         self.position_col = 1
         self.move_character_to(self.position_row, self.position_col)
 
+    # overriden from character class to be able to display several pictures as well as handle turn-only move
     def move_character_to(self, row, col):
         if self.position_row == row and self.position_col == col:
             self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 1) * 72 + 36,
@@ -73,61 +75,18 @@ class Hero(Character):
                 self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 1) * 72 + 36,
                                          image=self.image_right)
 
-    """
-
-    def draw_hero(self, x_pos, y_pos):
-
-        if x_pos == self.position_row and y_pos == self.position_col:
-            self.canvas.create_image((self.position_row - 1) * 72 + 36, (self.position_col - 1) * 72 + 36,
-                                     image=self.image_down)
-
-        if x_pos == self.position_row + 1:
-            if self.controller.maze.layout[self.position_col][self.position_row + 1] != 1:
-                self.canvas.create_image(self.position_row * 72 + 36, (self.position_col - 1) * 72 + 36,
-                                         image=self.image_right)
-                self.position_row = x_pos
-            else:
-                self.canvas.create_image((self.position_row - 1) * 72 + 36, (self.position_col - 1) * 72 + 36,
-                                         image=self.image_right)
-
-        if x_pos == self.position_row - 1:
-            if self.controller.maze.layout[self.position_col][self.position_row - 1] != 1:
-                self.canvas.create_image((self.position_row - 2) * 72 + 36, (self.position_col - 1) * 72 + 36,
-                                         image=self.image_left)
-                self.position_row = x_pos
-            else:
-                self.canvas.create_image((self.position_row - 1) * 72 + 36, (self.position_col - 1) * 72 + 36,
-                                         image=self.image_left)
-
-        if y_pos == self.position_col + 1:
-            if self.controller.maze.layout[self.position_col + 1][self.position_row] != 1:
-                self.canvas.create_image((self.position_row - 1) * 72 + 36, self.position_col * 72 + 36,
-                                         image=self.image_down)
-                self.position_col = y_pos
-            else:
-                self.canvas.create_image((self.position_row - 1) * 72 + 36, (self.position_col - 1) * 72 + 36,
-                                         image=self.image_down)
-
-        if y_pos == self.position_col - 1:
-            if self.controller.maze.layout[self.position_col - 1][self.position_row] != 1:
-                self.canvas.create_image((self.position_row - 1) * 72 + 36, (self.position_col - 2) * 72 + 36,
-                                         image=self.image_up)
-                self.position_col = y_pos
-            else:
-                self.canvas.create_image((self.position_row - 1) * 72 + 36, (self.position_col - 1) * 72 + 36,
-                                         image=self.image_up)
-
-    """
-
+    # getter for hero position
     def get_hero_position(self):
         return [self.position_col, self.position_row]
 
+    # leveling function that increases heros stats
     def level_up(self):
         self.level += 1
         self.hp += self.roll_d6()
         self.dp += self.roll_d6()
         self.sp += self.roll_d6()
 
+    # function to heal hero on new level
     def heal(self):
         i = random.randint(0, 9)
 

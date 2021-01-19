@@ -2,6 +2,8 @@ from wanderer.maze import Maze
 from wanderer.hero import Hero
 from wanderer.enemies import Enemies
 
+
+# controller class that serves as the basis of interaction for all the other classes
 class Controller():
 
     def __init__(self, canvas):
@@ -11,6 +13,7 @@ class Controller():
         self.enemies = Enemies(canvas, self)
         pass
 
+    # reinstantiating maze to create a new level
     def next_level(self):
         self.canvas.delete("all")
         self.maze = Maze(self.canvas, self, self.maze.level + 1)
