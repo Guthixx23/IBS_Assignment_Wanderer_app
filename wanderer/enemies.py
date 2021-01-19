@@ -34,6 +34,17 @@ class Enemies():
     def get_boss(self):
         return self.enemies[0]
 
+    def move_all_enemies(self):
+        for i in self.enemies:
+            move = i.find_valid_moves()
+            i.move_character_to(move[0],move[1])
 
+    def hide_all_enemies(self):
+        for i in self.enemies:
+            i.hide_from_maze()
+
+    def draw_all_enemies(self):
+        for i in self.enemies:
+            i.move_character_to(i.position_row, i.position_col)
 
 

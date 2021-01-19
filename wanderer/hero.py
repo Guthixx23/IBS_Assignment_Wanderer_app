@@ -15,6 +15,7 @@ class Hero(Character):
         self.is_fighting = False
         self.level = 1
         self.has_key = False
+        self.number_of_moves = 0
 
         self.controller = controller
         self.canvas = canvas
@@ -25,9 +26,9 @@ class Hero(Character):
         self.image_up = PhotoImage(file="images/hero-up.gif")
         self.position_row = 1
         self.position_col = 1
-        self.draw_hero_2(self.position_row, self.position_col)
+        self.move_character_to(self.position_row, self.position_col)
 
-    def draw_hero_2(self, row, col):
+    def move_character_to(self, row, col):
         if self.position_row == row and self.position_col == col:
             self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 1) * 72 + 36,
                                      image=self.image_down)

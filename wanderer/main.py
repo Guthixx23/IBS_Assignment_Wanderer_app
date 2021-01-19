@@ -27,24 +27,53 @@ def on_key_press(e):
 
         if e.keycode == 87:
             # up
-            ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
-            ctr.hero.draw_hero_2(ctr.hero.position_row-1, ctr.hero.position_col)
+            #ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+            ctr.hero.hide_from_maze()
+            ctr.hero.move_character_to(ctr.hero.position_row - 1, ctr.hero.position_col)
+            ctr.hero.number_of_moves += 1
+
+            if ctr.hero.number_of_moves % 2 == 0:
+                ctr.enemies.hide_all_enemies()
+                ctr.hero.move_character_to(ctr.hero.position_row , ctr.hero.position_col)
+                ctr.enemies.move_all_enemies()
+
             print("up [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
 
         elif e.keycode == 83:
             # down
-            ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
-            ctr.hero.draw_hero_2(ctr.hero.position_row+1, ctr.hero.position_col )
+            #ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+            ctr.hero.hide_from_maze()
+            ctr.hero.move_character_to(ctr.hero.position_row + 1, ctr.hero.position_col)
+            ctr.hero.number_of_moves += 1
+
+            if ctr.hero.number_of_moves % 2 == 0:
+                ctr.enemies.hide_all_enemies()
+                ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col)
+                ctr.enemies.move_all_enemies()
             print("down [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
         elif e.keycode == 68:
             # right
-            ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
-            ctr.hero.draw_hero_2(ctr.hero.position_row, ctr.hero.position_col+1 )
+            #ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+            ctr.hero.hide_from_maze()
+            ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col + 1)
+            ctr.hero.number_of_moves += 1
+
+            if ctr.hero.number_of_moves % 2 == 0:
+                ctr.enemies.hide_all_enemies()
+                ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col)
+                ctr.enemies.move_all_enemies()
             print("right [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
         elif e.keycode == 65:
             # left
-            ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
-            ctr.hero.draw_hero_2(ctr.hero.position_row, ctr.hero.position_col-1)
+            #ctr.maze.draw_cell(ctr.hero.position_row, ctr.hero.position_col)
+            ctr.hero.hide_from_maze()
+            ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col - 1)
+            ctr.hero.number_of_moves += 1
+
+            if ctr.hero.number_of_moves % 2 == 0:
+                ctr.enemies.hide_all_enemies()
+                ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col)
+                ctr.enemies.move_all_enemies()
             print("left [" + str(current_pos[0]) + "  " + str(current_pos[1]) + " ]")
     else:
         if e.keycode == 32:

@@ -17,6 +17,6 @@ class Controller():
         self.enemies = Enemies(self.canvas, self)
         self.hero.position_row = 1
         self.hero.position_col = 1
-        self.hero.draw_hero_2(1,1)
+        self.hero.move_character_to(1, 1)
         self.hero.has_key = False
         self.hero.heal()

@@ -74,4 +74,63 @@ class Character():
         if strike_value > defender.dp:
             defender.current_hp -= (strike_value - defender.dp)
 
+    def move_character_to(self, row, col):
+
+        # down
+        if row == self.position_row + 1:
+            if self.controller.maze.layout[self.position_row + 1][self.position_col] != 1:
+                self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row) * 72 + 36,
+                                         image=self.image)
+                self.position_row = row
+            else:
+                self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 1) * 72 + 36,
+                                         image=self.image)
+
+        # up
+        if row == self.position_row - 1:
+            if self.controller.maze.layout[self.position_row - 1][self.position_col] != 1:
+                self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 2) * 72 + 36,
+                                         image=self.image)
+                self.position_row = row
+            else:
+                self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 1) * 72 + 36,
+                                         image=self.image)
+
+        # left
+        if col == self.position_col - 1:
+            if self.controller.maze.layout[self.position_row][self.position_col - 1] != 1:
+                self.canvas.create_image((self.position_col - 2) * 72 + 36, (self.position_row - 1) * 72 + 36,
+                                         image=self.image)
+                self.position_col = col
+            else:
+                self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 1) * 72 + 36,
+                                         image=self.image)
+
+        # right
+        if col == self.position_col + 1:
+            if self.controller.maze.layout[self.position_row][self.position_col + 1] != 1:
+                self.canvas.create_image((self.position_col) * 72 + 36, (self.position_row - 1) * 72 + 36,
+                                         image=self.image)
+                self.position_col = col
+            else:
+                self.canvas.create_image((self.position_col - 1) * 72 + 36, (self.position_row - 1) * 72 + 36,
+                                         image=self.image)
+
+
+    def find_valid_moves(self):
+        correct_moves = []
+
+        if self.controller.maze.layout[self.position_row+1][self.position_col] != 1:
+            correct_moves.append([self.position_row+1, self.position_col])
+        if self.controller.maze.layout[self.position_row-1][self.position_col] != 1:
+            correct_moves.append([self.position_row-1, self.position_col])
+        if self.controller.maze.layout[self.position_row][self.position_col+1] != 1:
+            correct_moves.append([self.position_row, self.position_col+1])
+        if self.controller.maze.layout[self.position_row][self.position_col-1] != 1:
+            correct_moves.append([self.position_row, self.position_col-1])
+
+        return correct_moves[random.randint(0,len(correct_moves)-1)]
+
+    def hide_from_maze(self):
+        self.controller.maze.draw_cell(self.position_row, self.position_col)
 
