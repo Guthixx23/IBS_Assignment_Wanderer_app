@@ -18,6 +18,7 @@ class Controller():
         self.canvas.delete("all")
         self.maze = Maze(self.canvas, self, self.maze.level + 1)
         self.enemies = Enemies(self.canvas, self)
+        self.enemies.random_event_paralyzed()
         self.hero.position_row = 1
         self.hero.position_col = 1
         self.hero.move_character_to(1, 1)

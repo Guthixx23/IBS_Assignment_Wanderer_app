@@ -10,6 +10,7 @@ class Enemies():
         self.canvas = canvas
         self.controller = controller
         self.enemies = []
+        self.are_paralysed = False
 
         self.enemies.append(Boss(self.canvas, self.controller))
 
@@ -50,3 +51,8 @@ class Enemies():
     def draw_all_enemies(self):
         for i in self.enemies:
             i.move_character_to(i.position_row, i.position_col)
+
+    #function to implement paralyzation upon entering new level
+    def random_event_paralyzed(self):
+        if random.randint(1, 8) == 1:
+            self.are_paralysed = True

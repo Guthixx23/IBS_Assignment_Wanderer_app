@@ -25,7 +25,7 @@ def on_key_press(e):
             ctr.hero.move_character_to(ctr.hero.position_row - 1, ctr.hero.position_col)
             ctr.hero.number_of_moves += 1
 
-            if ctr.hero.number_of_moves % 2 == 0:
+            if ctr.hero.number_of_moves % 2 == 0 and not ctr.enemies.are_paralysed:
                 ctr.enemies.hide_all_enemies()
                 ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col)
                 ctr.enemies.move_all_enemies()
@@ -36,7 +36,7 @@ def on_key_press(e):
             ctr.hero.move_character_to(ctr.hero.position_row + 1, ctr.hero.position_col)
             ctr.hero.number_of_moves += 1
 
-            if ctr.hero.number_of_moves % 2 == 0:
+            if ctr.hero.number_of_moves % 2 == 0 and not ctr.enemies.are_paralysed:
                 ctr.enemies.hide_all_enemies()
                 ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col)
                 ctr.enemies.move_all_enemies()
@@ -47,7 +47,7 @@ def on_key_press(e):
             ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col + 1)
             ctr.hero.number_of_moves += 1
 
-            if ctr.hero.number_of_moves % 2 == 0:
+            if ctr.hero.number_of_moves % 2 == 0 and not ctr.enemies.are_paralysed:
                 ctr.enemies.hide_all_enemies()
                 ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col)
                 ctr.enemies.move_all_enemies()
@@ -57,7 +57,7 @@ def on_key_press(e):
             ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col - 1)
             ctr.hero.number_of_moves += 1
 
-            if ctr.hero.number_of_moves % 2 == 0:
+            if ctr.hero.number_of_moves % 2 == 0 and not ctr.enemies.are_paralysed:
                 ctr.enemies.hide_all_enemies()
                 ctr.hero.move_character_to(ctr.hero.position_row, ctr.hero.position_col)
                 ctr.enemies.move_all_enemies()

@@ -41,3 +41,17 @@ the monster are moving towards each other, resulting in a switch of cells*
 
 Try to kill as many skeletons as possible to level up, before you go to
 the next level, to maximize the potential healing.
+
+### Extras
+
+Every time the hero enters a new level in the maze a random map is generated. Then 
+the validity of the map is checked. If a map is valid (all the floor tiles are 
+connected, there are no unreachable parts) then the hero progresses on the said level.
+Otherwise the default map is displayed. The reason behind not having random maps every
+time the hero advances in teh maze is that the algorithm checking the validity 
+tremendously slows down the rendering. To avoid that, bot the number of wall blocks
+and the occurence of a random map were limited.
+
+Random events are also implemented in the game. With a 1 in 8 chance monsters are 
+paralyzed on the given level making them unable to move.
+

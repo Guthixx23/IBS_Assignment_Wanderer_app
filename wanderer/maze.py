@@ -1,4 +1,5 @@
 from tkinter import *
+import random
 
 
 # maze class
@@ -12,8 +13,12 @@ class Maze():
         self.floor = PhotoImage(file="images/floor.gif")
         self.hero = PhotoImage(file="images/hero-down.gif")
         self.layout = []
+        self.tracker_grid = []
+        self.validity_count = 0
 
+        self.init_tracker_grid()
         self.init_layout()
+        self.set_map()
         self.draw_maze()
 
     # function to draw maze
@@ -34,7 +39,15 @@ class Maze():
                     temp.append(0)
             self.layout.append(temp)
 
-        self.default_map()
+    # setting map either to default or random
+    def set_map(self):
+        number_of_walls = random.randint(10, 17)
+        self.random_map(number_of_walls)
+
+        if not self.validate_map(1, 1, number_of_walls):
+            self.layout = []
+            self.init_layout()
+            self.default_map()
 
     # initializer function to default map
     def default_map(self):
@@ -84,3 +97,44 @@ class Maze():
         else:
             self.canvas.create_image((row - 1) * self.floor.width() + self.floor.width() / 2,
                                      (col - 1) * self.floor.width() + self.floor.width() / 2, image=self.floor)
+
+    # randomly placing wall blocks in the maze
+    def random_map(self, number_of_walls):
+        for i in range(number_of_walls):
+            k = random.randint(1, 10)
+            l = random.randint(1, 10)
+
+            if k == 1 and l == 1:
+                continue
+
+            elif self.layout[k][l] != 1:
+                self.layout[k][l] = 1
+
+    # initializing the tracker grid used in validity check
+    def init_tracker_grid(self):
+        self.tracker_grid.append([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+        for i in range(10):
+            self.tracker_grid.append([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
+        self.tracker_grid.append([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+
+    # flood fill algorythm to check whether all floor tiles are connected in the maze.
+    def validate_map(self, row, col, number_of_walls):
+
+        self.tracker_grid[row][col] = 1
+
+        if self.layout[row][col] == 0:
+            self.validity_count += 1
+
+        if self.layout[row + 1][col] == 0 and self.tracker_grid[row + 1][col] == 0:
+            self.validate_map(row + 1, col, number_of_walls)
+        if self.layout[row - 1][col] == 0 and self.tracker_grid[row - 1][col] == 0:
+            self.validate_map(row - 1, col, number_of_walls)
+        if self.layout[row][col + 1] == 0 and self.tracker_grid[row][col + 1] == 0:
+            self.validate_map(row, col + 1, number_of_walls)
+        if self.layout[row][col - 1] == 0 and self.tracker_grid[row][col - 1] == 0:
+            self.validate_map(row, col - 1, number_of_walls)
+
+        if self.validity_count + number_of_walls == 100:
+            return True
+        else:
+            return False
